@@ -1,0 +1,63 @@
+
+class Product:
+    def __init__(self, name, price, brand):
+        self.name = name
+        self.price = price
+        self.brand = brand
+        
+    def __str__(self):
+        return f"{self.name} by {self.brand} is priced at {self.price}"
+
+
+class AvianBrands:
+    def __init__(self):
+        self.products = []
+        
+    def create(self, product):
+        self.products.append(product)
+        
+    def read(self, name):
+        for product in self.products:
+            if product.name == name:
+                return product
+        return None
+    
+    def update(self, name, product):
+        index = 0
+        for i, p in enumerate(self.products):
+            if p.name == name:
+                index = i
+                break
+        self.products[index] = product
+        
+    def delete(self, name):
+        index = 0
+        for i, p in enumerate(self.products):
+            if p.name == name:
+                index = i
+                break
+        del self.products[index]
+
+avian_brands = AvianBrands()
+product1 = Product("cat genteng", 4.99, "Avian")
+product2 = Product("cat tembok", 12.99, "Avian")
+product3 = Product("cat eksterior", 14.99, "Avian")
+product4 = Product("cat interior", 12.99, "Avian")
+product5 = Product("cat waterproof", 12.99, "Avian")
+
+avian_brands.create(product1)
+avian_brands.create(product2)
+avian_brands.create(product3)
+avian_brands.create(product4)
+avian_brands.create(product5)
+
+print(avian_brands.read("cat genteng")) # cat genteng by Avian Brands is priced at 4.99
+
+product3 = Product("cat genteng", 7.99, "Avian Brands")
+avian_brands.update("cat genteng", product3)
+
+print(avian_brands.read("cat genteng")) # bird feeder by Avian Brands is priced at 7.99
+
+avian_brands.delete("cat genteng")
+
+print(avian_brands.read("cat genteng")) # None
